@@ -15,7 +15,9 @@ namespace MultiThreadChat2
         private Socket serverSocket;
         private IPAddress ip;
         private int port = 5000;
-        
+        private int times;
+        private int timesa;
+        private int timeasdfdss;
 
         public ServerObject(IPAddress ip, int port)
         {
