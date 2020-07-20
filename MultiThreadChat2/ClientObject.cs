@@ -34,6 +34,13 @@ namespace MultiThreadChat2
             {
                 message = RecvData();
 
+                if (message == "!users")
+                {
+                    string userList = serverObject.GetUsersList();
+                    SendToTarget($"Users online:\n{userList}");
+                    continue;
+                }
+
                 if (message == null)
                     break;
 
@@ -60,7 +67,7 @@ namespace MultiThreadChat2
 
                 return message.ToString();
             }
-            catch (Exception ex)
+            catch
             {
                 Console.WriteLine($"User {Username} is disconnected!");
                 this.serverObject.BroadcastMessage(Id, $"User {Username} is disconnected!", "Server>> ");
@@ -68,6 +75,12 @@ namespace MultiThreadChat2
                 return null;
             }
            
+        }
+
+        private void SendToTarget(string message)
+        {
+            byte[] data = Encoding.ASCII.GetBytes(message);
+            clientSocket.Send(data);
         }
     }
 }

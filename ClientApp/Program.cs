@@ -18,6 +18,9 @@ namespace ClientApp
             Console.Write("Enter your name: ");
             username = Console.ReadLine();
 
+            if (username == "")
+                Environment.Exit(0);
+
             serverSocket = ConnetToServer();
 
             Thread threadRecv = new Thread(new ThreadStart(RecvData));
@@ -52,7 +55,7 @@ namespace ClientApp
             while (true)
             {
                 string message = Console.ReadLine();
-
+    
                 byte[] data = new byte[message.Length];
                 data = Encoding.UTF8.GetBytes(message);
 
